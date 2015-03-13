@@ -4,7 +4,7 @@ module Soulmate
   module Helpers
 
     def prefixes_for_phrase(phrase)
-      words = normalize(phrase).split(/[\s@]/).reject do |w|
+      words = normalize(phrase).split(' ').reject do |w|
         Soulmate.stop_words.include?(w)
       end
       words.map do |w|
@@ -13,6 +13,8 @@ module Soulmate
     end
 
     def normalize(str)
+      # treat these as word separators
+      str.gsub!(/[@]/, ' ')
       # Letter, Mark, Number, Connector_Punctuation (Chinese, Japanese, etc.)
       str.downcase.gsub(/[^\p{Word}\ ]/i, '').strip
     end
