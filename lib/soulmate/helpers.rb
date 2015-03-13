@@ -4,7 +4,7 @@ module Soulmate
   module Helpers
 
     def prefixes_for_phrase(phrase)
-      words = normalize(phrase).split(' ').reject do |w|
+      words = normalize(phrase).split(/[\s@]/).reject do |w|
         Soulmate.stop_words.include?(w)
       end
       words.map do |w|
