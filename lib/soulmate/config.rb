@@ -4,13 +4,20 @@ require 'redis'
 module Soulmate
   module Config
     DEFAULT_MIN_COMPLETE = 2
+    DEFAULT_MAX_COMPLETE = 20
+
     DEFAULT_STOP_WORDS = ["vs", "at", "the"]
 
-    attr_writer :min_complete
+    attr_writer :min_complete, :max_complete
 
     def min_complete
       @min_complete ||= DEFAULT_MIN_COMPLETE
     end
+
+    def max_complete
+      @max_complete ||= DEFAULT_MAX_COMPLETE
+    end
+
 
     # Accepts:
     #   1. A Redis URL String 'redis://host:port/db'
