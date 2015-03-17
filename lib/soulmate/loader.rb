@@ -2,7 +2,8 @@ module Soulmate
 
   class Loader < Base
 
-    def load(items)
+    # all data/indices associated with this type
+    def purge
       # delete the sorted sets for this type
       phrases = Soulmate.redis.smembers(base)
       Soulmate.redis.pipelined do
@@ -19,6 +20,11 @@ module Soulmate
 
       # delete the data stored for this type
       Soulmate.redis.del(database)
+    end
+
+    # starts from scratch with this type and given items
+    def load(items)
+      purge
 
       items.each_with_index do |item, i|
         add(item, :skip_duplicate_check => true)
