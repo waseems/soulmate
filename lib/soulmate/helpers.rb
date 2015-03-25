@@ -14,7 +14,7 @@ module Soulmate
 
     def normalize(str)
       # treat these as word separators
-      seps = /[@]/      
+      seps = /[@,]/      
       # Letter, Mark, Number, Connector_Punctuation (Chinese, Japanese, etc.)
       str.downcase.gsub(seps, ' ').gsub(/[^\p{Word}\ ]/i, '').strip
     end
